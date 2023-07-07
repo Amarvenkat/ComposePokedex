@@ -1,9 +1,9 @@
 plugins {
     id 'com.android.application'
-    id 'org.jetbrains.kotlin.android'
     id 'kotlin-android'
     id 'kotlin-kapt'
-
+    id 'dagger.hilt.android.plugin'
+    id 'kotlin-parcelize'
 }
 
 android {
@@ -32,7 +32,9 @@ android {
         }
         dependencies {
             // other plugins...
-            classpath 'com.google.dagger:hilt-android-gradle-plugin:2.46.1'
+            classpath "com.android.tools.build:gradle:7.0.0-alpha12"
+            classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.20"
+            classpath "com.google.dagger:hilt-android-gradle-plugin:2.43.2"
         }
     }
     buildTypes {
@@ -41,7 +43,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
-
+    hilt {
+        enableAggregatingTask = true
+    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -109,13 +113,13 @@ dependencies {
     implementation "com.google.accompanist:accompanist-coil:0.7.0"
 
     //Dagger - Hilt
-    implementation "com.google.dagger:hilt-android:2.40.5"
-    kapt "com.google.dagger:hilt-android-compiler:2.40.5"
-    implementation "androidx.hilt:hilt-lifecycle-viewmodel:1.0.0-alpha03"
-    kapt "androidx.hilt:hilt-compiler:1.0.0"
-    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    implementation "com.google.dagger:hilt-android:2.43.2"
+    kapt "com.google.dagger:hilt-android-compiler:2.43.2"
+
+    kapt "androidx.hilt:hilt-compiler:1.0.0-beta01"
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0-alpha01'
 
     implementation 'androidx.palette:palette:1.0.0'
 
 }
-
+kapt {   correctErrorTypes true }
